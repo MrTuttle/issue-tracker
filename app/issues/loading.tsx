@@ -1,8 +1,6 @@
 // app/issues/loading.tsx
 
 import { Table, TableCell } from "@radix-ui/themes";
-import React from "react";
-import IssueStatusBadge from "../components/IssueStatusBadge";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import IssueActions from "./IssueActions";
