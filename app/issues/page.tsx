@@ -6,12 +6,12 @@ import { IssueStatusBadge, Link } from "@/app/components";
 // import Link from "next/link";
 import prisma from "@/prisma/client";
 // delay to see skeletons and loadings
-// import delay from "delay";
+import delay from "delay";
 import IssueActions from "./IssueActions";
 
 const issuesPage = async () => {
   const issues = await prisma.issue.findMany();
-  // await delay(1000);
+  await delay(1000);
   return (
     <div>
       <IssueActions />
