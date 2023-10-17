@@ -2,8 +2,8 @@
 
 "use client";
 import { Button, Callout, Text, TextField } from "@radix-ui/themes";
-// import SimpleMDE from "react-simplemde-editor";
-import dynamic from "next/dynamic";
+import SimpleMDE from "react-simplemde-editor";
+// import dynamic from "next/dynamic";
 import { useForm, Controller } from "react-hook-form";
 import "easymde/dist/easymde.min.css";
 import axios from "axios";
@@ -19,9 +19,9 @@ import { Issue } from "@prisma/client";
 type IssueFormData = z.infer<typeof issueSchema>;
 
 // lazyloading of the markdown editor
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
+// const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+//   ssr: false,
+// });
 
 // issue?: -> optional props typed in Issue by prisma, only needed on edit page
 // interface bloc is factorized inline
