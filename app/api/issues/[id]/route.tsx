@@ -1,3 +1,5 @@
+// app/api/[id]/route.tsx
+
 import { issueSchema } from "@/app/validationSchema";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
