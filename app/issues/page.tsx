@@ -2,10 +2,9 @@
 
 import React from "react";
 import { Table, TableCell } from "@radix-ui/themes";
+import { IssueStatusBadge, Link } from "@/app/components";
 // import Link from "next/link";
-import Link from "@/app/components/Link";
 import prisma from "@/prisma/client";
-import IssueStatusBadge from "../components/IssueStatusBadge";
 // delay to see skeletons and loadings
 // import delay from "delay";
 import IssueActions from "./IssueActions";
