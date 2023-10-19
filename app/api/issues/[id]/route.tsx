@@ -3,6 +3,7 @@
 import { issueSchema } from "@/app/validationSchema";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import delay from "delay";
 
 export async function PATCH(
   request: NextRequest,
@@ -33,6 +34,7 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  // delay(100000); to test long response
   const issue = await prisma.issue.findUnique({
     where: {
       id: parseInt(params.id),
