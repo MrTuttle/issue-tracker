@@ -6,7 +6,13 @@ import { usePathname } from "next/navigation";
 import { HiMiniCpuChip } from "react-icons/hi2";
 import classnames from "classnames";
 import { useSession } from "next-auth/react";
-import { Box } from "@radix-ui/themes";
+import {
+  Avatar,
+  Box,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  Text,
+} from "@radix-ui/themes";
 
 const NavBar = () => {
   const currentPath = usePathname();
@@ -41,7 +47,26 @@ const NavBar = () => {
       </ul>
       <Box>
         {status === "authenticated" && (
-          <Link href="/api/auth/signout">Log out</Link>
+          // <Link href="/api/auth/signout">Log out</Link>
+          <DropdownMenu.Root>
+            <DropdownMenuTrigger>
+              <Avatar
+                src={session.user!.image!}
+                fallback="?"
+                size="2"
+                radius="full"
+                className="cursor-pointer"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.Label>
+                <Text size="2">{session.user!.email}</Text>
+              </DropdownMenu.Label>
+              <DropdownMenu.Item>
+                <Link href="/api/auth/signout">Log out</Link>
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
         )}
         {status === "unauthenticated" && (
           <Link href="/api/auth/signin">Log in</Link>
