@@ -12,7 +12,7 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
 
 const issuesPage = async () => {
-  await delay(1000);
+  // await delay(1000);
   const session = await getServerSession(authOptions);
 
   const issues = await prisma.issue.findMany();

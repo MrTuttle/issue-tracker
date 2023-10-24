@@ -59,9 +59,6 @@ dependencies:
   postcss:
     specifier: 8.4.31
     version: 8.4.31
-  prisma:
-    specifier: 5.3.1
-    version: 5.3.1
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -97,6 +94,9 @@ devDependencies:
   '@tailwindcss/typography':
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.3.3)
+  prisma:
+    specifier: 5.3.1
+    version: 5.3.1
 
 packages:
 
@@ -378,7 +378,6 @@ packages:
   /@prisma/engines@5.3.1:
     resolution: {integrity: sha512-6QkILNyfeeN67BNEPEtkgh3Xo2tm6D7V+UhrkBbRHqKw9CTaz/vvTP/ROwYSP/3JT2MtIutZm/EnhxUiuOPVDA==}
     requiresBuild: true
-    dev: false
 
   /@radix-ui/colors@3.0.0:
     resolution: {integrity: sha512-FUOsGBkHrYJwCSEtWRCIfQbZG7q1e6DgxCIOe1SUQzDe/7rXXeA47s8yCn6fuTNQAj1Zq4oTFi9Yjp3wzElcxg==}
@@ -3755,7 +3754,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@prisma/engines': 5.3.1
-    dev: false
 
   /prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
