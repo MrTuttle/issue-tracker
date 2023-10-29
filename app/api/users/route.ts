@@ -1,7 +1,6 @@
 // app/api/users/route.ts
 import prisma from "@/prisma/client";
-// import { Issue, User } from "@prisma/client";
-// import { Prisma } from "@prisma/client";
+
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
