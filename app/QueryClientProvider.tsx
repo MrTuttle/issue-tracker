@@ -1,4 +1,7 @@
 // app/QueryClientProvider.tsx
+
+"use client";
+
 import {
   QueryClient,
   QueryClientProvider as ReactQueryClientProvider,
