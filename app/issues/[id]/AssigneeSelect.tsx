@@ -3,9 +3,10 @@
 "use client";
 
 import { User } from "@prisma/client";
-import { Select } from "@radix-ui/themes";
+import { Select, Text } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+// import { Skeleton } from "@/app/components";
 
 const AssigneeSelect = () => {
   const {
@@ -14,8 +15,12 @@ const AssigneeSelect = () => {
     isLoading,
   } = useQuery<User[]>({
     queryKey: ["users"],
-    queryFn: () => axios.get("/api/users").then((res) => res.data),
+    queryFn: () => axios.get("/apix/users").then((res) => res.data),
+    staleTime: 60 * 1000, // refresh every 60 sec
+    retry: 3,
   });
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return null;
 
   return (
     <Select.Root>
