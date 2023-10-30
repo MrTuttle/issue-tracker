@@ -1,6 +1,6 @@
-// app/api/[id]/route.tsx
+// app/api/issues/[id]/route.tsx
 
-import { issueSchema } from "@/app/validationSchema";
+import { patchIssueSchema } from "@/app/validationSchema";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import delay from "delay";
@@ -15,9 +15,17 @@ export async function PATCH(
   if (!session) return NextResponse.json({}, { status: 401 });
 
   const body = await request.json();
-  const validation = issueSchema.safeParse(body);
+  const validation = patchIssueSchema.safeParse(body);
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 });
+  const { assignedToUserId, title, description } = body;
+  if (assignedToUserId) {
+    const user = await prisma.user.findUnique({
+      where: { id: assignedToUserId },
+    });
+    if (!user)
+      return NextResponse.json({ error: "Invalid user" }, { status: 400 });
+  }
   const issue = await prisma.issue.findUnique({
     where: {
       id: parseInt(params.id),
@@ -28,8 +36,9 @@ export async function PATCH(
   const updatedIssue = await prisma.issue.update({
     where: { id: issue.id },
     data: {
-      title: body.title,
-      description: body.description,
+      title,
+      description,
+      assignedToUserId,
     },
   });
   return NextResponse.json(updatedIssue);

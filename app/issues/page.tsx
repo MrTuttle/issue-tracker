@@ -1,7 +1,7 @@
 // app/issue/page.tsx
 
 import React from "react";
-import { Table, TableCell } from "@radix-ui/themes";
+import { Table, TableCell, Text } from "@radix-ui/themes";
 import { IssueStatusBadge, Link } from "@/app/components";
 // import Link from "next/link";
 import prisma from "@/prisma/client";
@@ -12,12 +12,17 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
 
 const issuesPage = async () => {
-  await delay(1000);
+  // await delay(1000);
   const session = await getServerSession(authOptions);
 
   const issues = await prisma.issue.findMany();
+  const users = await prisma.user.findMany();
+  const articles = await prisma.article.findMany();
   return (
     <div>
+      {users.map((user) => (
+        <Text key={user.id}>{user.name}</Text>
+      ))}
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>

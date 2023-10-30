@@ -8,7 +8,7 @@ import IssueDetails from "./IssueDetails";
 import DeleteIssueButton from "./DeleteIssueButton";
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
-import AssigneeSelect from "../_components/AssigneeSelect";
+import AssigneeSelect from "./AssigneeSelect";
 // delay to see skeletons
 // import delay from "delay";
 
@@ -36,7 +36,7 @@ const IssueDetailPage = async ({ params }: Props) => {
       {session && (
         <Box>
           <Flex direction="column" gap="2">
-            <AssigneeSelect />
+            <AssigneeSelect issue={issue} />
             <EdditIssueButton issueId={issue.id} />
             <DeleteIssueButton issueId={issue.id} />
           </Flex>

@@ -20,6 +20,9 @@ dependencies:
   '@radix-ui/themes':
     specifier: ^2.0.0
     version: 2.0.0(@types/react-dom@18.2.13)(@types/react@18.2.28)(react-dom@18.2.0)(react@18.2.0)
+  '@tanstack/react-query':
+    specifier: 4.35.3
+    version: 4.35.3(react-dom@18.2.0)(react@18.2.0)
   '@types/node':
     specifier: 20.8.4
     version: 20.8.4
@@ -59,9 +62,6 @@ dependencies:
   postcss:
     specifier: 8.4.31
     version: 8.4.31
-  prisma:
-    specifier: 5.3.1
-    version: 5.3.1
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -71,6 +71,9 @@ dependencies:
   react-hook-form:
     specifier: 7.46.1
     version: 7.46.1(react@18.2.0)
+  react-hot-toast:
+    specifier: 2.4.1
+    version: 2.4.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
   react-icons:
     specifier: ^4.11.0
     version: 4.11.0(react@18.2.0)
@@ -97,6 +100,9 @@ devDependencies:
   '@tailwindcss/typography':
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.3.3)
+  prisma:
+    specifier: 5.3.1
+    version: 5.3.1
 
 packages:
 
@@ -378,7 +384,6 @@ packages:
   /@prisma/engines@5.3.1:
     resolution: {integrity: sha512-6QkILNyfeeN67BNEPEtkgh3Xo2tm6D7V+UhrkBbRHqKw9CTaz/vvTP/ROwYSP/3JT2MtIutZm/EnhxUiuOPVDA==}
     requiresBuild: true
-    dev: false
 
   /@radix-ui/colors@3.0.0:
     resolution: {integrity: sha512-FUOsGBkHrYJwCSEtWRCIfQbZG7q1e6DgxCIOe1SUQzDe/7rXXeA47s8yCn6fuTNQAj1Zq4oTFi9Yjp3wzElcxg==}
@@ -1497,6 +1502,28 @@ packages:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.3.3
     dev: true
+
+  /@tanstack/query-core@4.35.3:
+    resolution: {integrity: sha512-PS+WEjd9wzKTyNjjQymvcOe1yg8f3wYc6mD+vb6CKyZAKvu4sIJwryfqfBULITKCla7P9C4l5e9RXePHvZOZeQ==}
+    dev: false
+
+  /@tanstack/react-query@4.35.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-UgTPioip/rGG3EQilXfA2j4BJkhEQsR+KAbF+KIuvQ7j4MkgnTCJF01SfRpIRNtQTlEfz/+IL7+jP8WA8bFbsw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.35.3
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
 
   /@types/codemirror@5.60.10:
     resolution: {integrity: sha512-ZTA3teiCWKT8HUUofqlGPlShu5ojdIajizsS0HpH6GL0/iEdjRt7fXbCLHHqKYP5k7dC/HnnWIjZAiELUwBdjQ==}
@@ -2722,6 +2749,14 @@ packages:
       slash: 3.0.0
     dev: false
 
+  /goober@2.1.13(csstype@3.1.2):
+    resolution: {integrity: sha512-jFj3BQeleOoy7t93E9rZ2de+ScC4lQICLwiAQmKMg9F6roKGaLSHoCDYKkWlSafg138jejvq/mTdvmnwDQgqoQ==}
+    peerDependencies:
+      csstype: ^3.0.10
+    dependencies:
+      csstype: 3.1.2
+    dev: false
+
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
@@ -3755,7 +3790,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@prisma/engines': 5.3.1
-    dev: false
 
   /prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
@@ -3798,6 +3832,20 @@ packages:
       react: ^16.8.0 || ^17 || ^18
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /react-hot-toast@2.4.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-j8z+cQbWIM5LY37pR6uZR6D4LfseplqnuAO4co4u8917hBUvXlEqyP1ZzqVLcqoyUesZZv/ImreoCeHVDpE5pQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      goober: 2.1.13(csstype@3.1.2)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - csstype
     dev: false
 
   /react-icons@4.11.0(react@18.2.0):
@@ -4471,6 +4519,14 @@ packages:
       detect-node-es: 1.1.0
       react: 18.2.0
       tslib: 2.6.2
+    dev: false
+
+  /use-sync-external-store@1.2.0(react@18.2.0):
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /util-deprecate@1.0.2:

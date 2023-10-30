@@ -1,4 +1,15 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+// next.config.js
 
-module.exports = nextConfig
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [{ key: "referred-policy", value: "no-referrer" }],
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;
