@@ -38,6 +38,7 @@ const issuesPage = async ({ searchParams }: Props) => {
   });
   return (
     <div>
+      {session && <IssueActions />}
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
@@ -69,7 +70,6 @@ const issuesPage = async ({ searchParams }: Props) => {
           ))}
         </Table.Body>
       </Table.Root>
-      {session && <IssueActions />}
     </div>
   );
 };
