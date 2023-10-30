@@ -10,19 +10,34 @@ import delay from "delay";
 import IssueActions from "./IssueActions";
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
+import { Status } from "@prisma/client";
 
-const issuesPage = async () => {
+interface Props {
+  searchParams: { status: Status };
+}
+
+const issuesPage = async ({ searchParams }: Props) => {
+  // console.log(searchParams.status);
+
   // await delay(1000);
+
+  // store statuses
+  const statuses = Object.values(Status);
+  // console.log("my statuses :" + statuses);
+
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+
   const session = await getServerSession(authOptions);
 
-  const issues = await prisma.issue.findMany();
-  const users = await prisma.user.findMany();
-  const articles = await prisma.article.findMany();
+  const issues = await prisma.issue.findMany({
+    where: {
+      status,
+    },
+  });
   return (
     <div>
-      {users.map((user) => (
-        <Text key={user.id}>{user.name}</Text>
-      ))}
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
