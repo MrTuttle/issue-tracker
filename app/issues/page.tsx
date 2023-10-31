@@ -39,16 +39,22 @@ const issuesPage = async ({ searchParams }: Props) => {
     ? searchParams.status
     : undefined;
 
-  const session = await getServerSession(authOptions);
+  const orderBy = columns
+    .map((column) => column.value)
+    .includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: "asc" }
+    : undefined;
 
   const issues = await prisma.issue.findMany({
     where: {
       status,
     },
+    orderBy,
   });
+
   return (
     <div>
-      {session && <IssueActions />}
+      <IssueActions />
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
