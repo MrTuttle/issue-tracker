@@ -19,7 +19,7 @@ import {
 const NavBar = () => {
   return (
     <nav className="border-b mb-5 px-5 py-3">
-      <Container>
+      <Container max-w-3xl m-auto>
         <Flex justify="between">
           <Flex align="center" gap="3">
             <Link href="/">
@@ -39,7 +39,7 @@ const NavLinks = () => {
   // console.log(currentPath);
 
   const links = [
-    { label: "Dashboard", href: "/dashboard" },
+    { label: "Dashboard", href: "/" },
     { label: "Issues", href: "/issues" },
   ];
   return (
