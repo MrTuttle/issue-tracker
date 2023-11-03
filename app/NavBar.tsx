@@ -19,7 +19,7 @@ import {
 const NavBar = () => {
   return (
     <nav className="border-b mb-5 px-5 py-3">
-      <Container>
+      <Container max-w-3xl m-auto>
         <Flex justify="between">
           <Flex align="center" gap="3">
             <Link href="/">
@@ -39,7 +39,7 @@ const NavLinks = () => {
   // console.log(currentPath);
 
   const links = [
-    { label: "Dashboard", href: "/dashboard" },
+    { label: "Dashboard", href: "/" },
     { label: "Issues", href: "/issues" },
   ];
   return (
@@ -63,13 +63,16 @@ const NavLinks = () => {
 
 const AuthStatus = () => {
   const { status, data: session } = useSession();
-  if (status === "loading") return null;
-  if (status === "authenticated")
+
+  if (status === "loading") return <p>Loading...</p>;
+
+  if (status === "unauthenticated")
     return (
       <Link className="nav-link" href="/api/auth/signin">
-        Log in
+        Login
       </Link>
     );
+
   // <Link href="/api/auth/signout">Log out</Link>
   return (
     <Box>

@@ -1,62 +1,68 @@
 // app/issue/page.tsx
 
-import React from "react";
-import { Table, TableCell, Text } from "@radix-ui/themes";
-import { IssueStatusBadge, Link } from "@/app/components";
-// import Link from "next/link";
 import prisma from "@/prisma/client";
 // delay to see skeletons and loadings
-import delay from "delay";
+import { Status } from "@prisma/client";
+import Pagination from "../components/Pagination";
 import IssueActions from "./IssueActions";
-import { getServerSession } from "next-auth";
-import authOptions from "@/app/auth/authOptions";
+import IssueTable, { IssueQuery, columnNames } from "./IssueTable";
+import { Flex } from "@radix-ui/themes";
+import { Metadata } from "next";
 
-const issuesPage = async () => {
+interface Props {
+  searchParams: IssueQuery;
+}
+
+const issuesPage = async ({ searchParams }: Props) => {
+  // console.log(searchParams.status);
+
   // await delay(1000);
-  const session = await getServerSession(authOptions);
 
-  const issues = await prisma.issue.findMany();
-  const users = await prisma.user.findMany();
-  const articles = await prisma.article.findMany();
+  // store statuses
+  const statuses = Object.values(Status);
+  // console.log("my statuses :" + statuses);
+
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+
+  const where = { status };
+
+  const orderBy = columnNames.includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: "asc" }
+    : undefined;
+
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 10;
+  const issues = await prisma.issue.findMany({
+    where,
+    orderBy,
+    skip: (page - 1) * pageSize,
+    take: pageSize,
+  });
+  const issueCount = await prisma.issue.count({ where });
+
   return (
-    <div>
-      {users.map((user) => (
-        <Text key={user.id}>{user.name}</Text>
-      ))}
-      <Table.Root variant="surface">
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">
-              Status
-            </Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">
-              Created
-            </Table.ColumnHeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {issues.map((issue) => (
-            <Table.Row key={issue.id}>
-              <TableCell>
-                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
-                <div className="block md:hidden">
-                  <IssueStatusBadge status={issue.status} />
-                </div>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">
-                <IssueStatusBadge status={issue.status} />
-              </TableCell>
-              <TableCell className="hidden md:table-cell">
-                {issue.createdAt.toDateString()}
-              </TableCell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table.Root>
-      {session && <IssueActions />}
-    </div>
+    <Flex direction="column" gap="3">
+      <IssueActions />
+      <IssueTable searchParams={searchParams} issues={issues} />
+
+      <Pagination
+        itemCount={issueCount}
+        pageSize={pageSize}
+        currentPage={page}
+      />
+    </Flex>
   );
+};
+// whats this ????
+export const dynamic = "force-dynamic";
+
+// metadata
+export const metadata: Metadata = {
+  // add also open graph and twitter properties
+  title: "Issue Tracker - Issue list",
+  description: "View all project issues",
 };
 
 export default issuesPage;
