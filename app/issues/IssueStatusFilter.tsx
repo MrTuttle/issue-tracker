@@ -1,9 +1,11 @@
 // app/issues/IssusStatusFilter.tsx
+
 "use client";
 
 import { Status } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import { useRouter, useSearchParams } from "next/navigation";
+
 
 const statuses: { label: string; value?: Status }[] = [
   { label: "All" },
@@ -27,6 +29,7 @@ const IssueStatusFilter = () => {
         // const query = status === "ALL" ? "" : `?status=${status}`;
         // router.push(`/issues${query}`);
         const query = params.size ? "?" + params.toString() : "";
+
         router.push(`/issues${query}`);
       }}
     >
